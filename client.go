@@ -28,15 +28,15 @@ type Client struct {
 // Battle is battle infomation
 type Battle struct {
 	// rule info
-	Lobby string `json:"lobby"`
-	Mode  string `json:"mode"`
-	Rule  string `json:"rule"`
+	Lobby Lobby `json:"lobby"`
+	Mode  Mode  `json:"mode"`
+	Rule  Rule  `json:"rule"`
 
 	// match info
-	Stage      string `json:"stage"`
-	GachiPower int    `json:"estimate_gachi_power"`
-	StartAt    int64  `json:"start_at"`
-	EndAt      int64  `json:"end_at"`
+	Stage      Stage `json:"stage"`
+	GachiPower int   `json:"estimate_gachi_power"`
+	StartAt    int64 `json:"start_at"`
+	EndAt      int64 `json:"end_at"`
 
 	// result
 	Result       string `json:"result"`
@@ -45,7 +45,7 @@ type Battle struct {
 	HisTeamCount int    `json:"his_team_count"`
 
 	// player info
-	Weapon       string `json:"weapon"`
+	Weapon       Weapon `json:"weapon"`
 	RankInTeam   int    `json:"rank_in_team"`
 	KillOrAssist int    `json:"kill_or_assist"`
 	Kill         int    `json:"kill"`
