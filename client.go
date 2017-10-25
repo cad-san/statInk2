@@ -42,7 +42,7 @@ type Battle struct {
 	Result       string `json:"result"`
 	KnockOut     string `json:"knock_out"`
 	MyTeamCount  int    `json:"my_team_count"`
-	HisTeamCount int    `json:"his_team_point"`
+	HisTeamCount int    `json:"his_team_count"`
 
 	// player info
 	Weapon       string `json:"weapon"`
