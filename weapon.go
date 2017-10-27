@@ -35,6 +35,7 @@ const (
 	Sputtery            Weapon = "sputtery"
 	Carbon              Weapon = "carbon"
 	Dynamo              Weapon = "dynamo"
+	DynamoTesla         Weapon = "dynamo_tesla"
 	HeroRollerReplica   Weapon = "heroroller_replica"
 	Splatroller         Weapon = "splatroller"
 	SplatrollerCollabo  Weapon = "splatroller_collabo"
