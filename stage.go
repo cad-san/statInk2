@@ -5,6 +5,7 @@ type Stage string
 const (
 	Ama       Stage = "ama"
 	Battera   Stage = "battera"
+	BBas      Stage = "bbass"
 	Chozame   Stage = "chozame"
 	Engawa    Stage = "engawa"
 	Fujitsubo Stage = "fujitsubo"
