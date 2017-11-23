@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>バトルの登録</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+
+  <div class="container">
+    <h3>バトルの登録</h3>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" href="#regular" role="tab" data-toggle="tab">レギュラー</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#gachi" role="tab" data-toggle="tab">ガチ/リーグ</a>
+      </li>
+    </ul>
+
+    <div class="tab-content container">
+      <div role="tabpanel" class="tab-pane" id="regular">
+        <form class="form-horizontal" method="post" action="/">
+          <input type="hidden" name="mode" value="regular">
+          <input type="hidden" name="rule" value="nawabari">
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="rule">ルール</label>
+              <input type="text" class="form-control" placeholder="ナワバリバトル" readonly>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">ロビー</label>
+              <select class="form-control" name="robby">
+                <option value="standard">野良</option>
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">ブキ</label>
+              <select class="form-control" name="weapon">
+                {{range $key, $value := .Weapons }}
+                {{if eq $key $.History.Weapon }}
+                <option value="{{$key}}" selected>{{$value}}</option>
+                {{else}}
+                <option value="{{$key}}">{{$value}}</option>
+                {{end}}{{end}}
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">ステージ</label>
+              <select class="form-control" name="stage">
+                {{range $key, $value := .Stages }}
+                {{if eq $key $.History.Stage }}
+                <option value="{{$key}}" selected>{{$value}}</option>
+                {{else}}
+                <option value="{{$key}}">{{$value}}</option>
+                {{end}}{{end}}
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">日時</label>
+              <input type="date" class="form-control" name="date" value="{{.History.Day}}">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="rule">開始時刻</label>
+              <input type="text" class="form-control" name="start_time" value="{{.History.Time}}" step="60">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="rule">試合時間</label>
+              <input type="text" class="form-control" name="duration" value="{{.History.Duration}}" step="1">
+            </div>
+            <div class="form-group btn-group col-sm-12" data-toggle="buttons">
+              <div class="col-sm-6 btn btn-outline-primary">
+                <input type="radio" name="" autocomplete="off">勝ち</button>
+              </div>
+              <div class="col-sm-6 btn btn-outline-danger">
+                <input type="radio" name="" autocomplete="off">負け</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div role="tabpanel" class="tab-pane active" id="gachi">
+        <form class="form-horizontal" method="post">
+          <input type="hidden" name="mode" value="gachi">
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="rule">ルール</label>
+              <select class="form-control" name="rule">
+                <option value="area"{{if eq .History.Rule "area"}}selected{{end}}>ガチエリア</option>
+                <option value="yagura"{{if eq .History.Rule "yagura"}}selected{{end}}>ガチヤグラ</option>
+                <option value="hoko"{{if eq .History.Rule "hoko"}}selected{{end}}>ガチホコ</option>
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="robby">ロビー</label>
+              <select class="form-control" name="lobby">
+                <option value="standard">ガチマッチ</option>
+                <option value="squad_2">リーグバトル（2人）</option>
+                <option value="squad_4">リーグバトル（4人）</option>
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">ブキ</label>
+              <select class="form-control" name="weapon">
+                {{range $key, $value := .Weapons }}
+                {{if eq $key $.History.Weapon }}
+                <option value="{{$key}}" selected>{{$value}}</option>
+                {{else}}
+                <option value="{{$key}}">{{$value}}</option>
+                {{end}}{{end}}
+                </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">ステージ</label>
+              <select class="form-control" name="stage">
+                {{range $key, $value := .Stages }}
+                {{if eq $key $.History.Stage }}
+                <option value="{{$key}}" selected>{{$value}}</option>
+                {{else}}
+                <option value="{{$key}}">{{$value}}</option>
+                {{end}}{{end}}
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="date">日時</label>
+              <input type="date" class="form-control" name="date" value="{{.History.Day}}">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="rule">開始時刻</label>
+              <input type="text" class="form-control" name="start_time" value="{{.History.Time}}" step="60">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="rule">試合時間</label>
+              <input type="text" class="form-control" name="duration" value="{{.History.Duration}}" step="1">
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="rule">ガチパワー</label>
+              <input type="number" class="form-control" name="gachi_power" value="{{.History.GachiPower}}" step="10">
+            </div>
+            <div class="form-group btn-group col-sm-12" data-toggle="buttons">
+              <div class="col-sm-6 btn btn-outline-primary">
+                <input type="radio" name="result" value="win" autocomplete="off">勝ち
+              </div>
+              <div class="col-sm-6 btn btn-outline-danger">
+                <input type="radio" name="result" value="lose" autocomplete="off">負け
+              </div>
+            </div>
+            <div class="form-group btn-group col-md-12" data-toggle="buttons">
+              <div class="col-md-6 btn btn-outline-success">
+                <input type="radio" name="knockout" value="yes" autocomplete="off">ノックアウト
+              </div>
+              <div class="col-sm-6 btn btn-outline-warning">
+                <input type="radio" name="knockout" value="no" autocomplete="off">タイムアップ
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="rule">カウント（自分）</label>
+                <input type="number" class="form-control" name="my_team_count" value="">
+              </div>
+            <div class="form-group col-md-4">
+                <label for="rule">カウント（敵）</label>
+                <input type="number" class="form-control" name="his_team_count" value="">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="rule">チーム内順位</label>
+                <select class="form-control" name="rank_in_team">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="kill_or_assist">キル+アシスト</label>
+              <input type="number" class="form-control" name="kill_or_assist">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="assist">アシスト</label>
+              <input type="number" class="form-control" name="assist">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="death">デス</label>
+              <input type="number" class="form-control" name="death">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="special">スペシャル</label>
+              <input type="number" class="form-control" name="special">
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="rule">ウデマエ</label>
+              <select class="form-control" name="rank">
+                <option value="s+">S+</option>
+                <option value="s">S</option>
+                <option value="a+">A+</option>
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="rule">ウデマエ（後）</label>
+              <select class="form-control" name="rank_after">
+                <option value="s+">S+</option>
+                <option value="s">S</option>
+                <option value="a+">A+</option>
+              </select>
+            </div>
+            <div class="form-group col-sm-12">
+              <button type="submit" class="btn btn-primary">
+                </span>保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</body>
+
+</html>
