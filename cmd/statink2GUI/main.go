@@ -16,6 +16,20 @@ import (
 	"github.com/pkg/errors"
 )
 
+var rankList = []string{
+	"c-",
+	"c",
+	"c+",
+	"b-",
+	"b",
+	"b+",
+	"a-",
+	"a",
+	"a+",
+	"s",
+	"s+",
+}
+
 type config struct {
 	APIKey string
 }
@@ -29,6 +43,7 @@ type history struct {
 	Mode       statink2.Mode
 	Weapon     statink2.Weapon
 	Stage      statink2.Stage
+	Rank       string
 	GachiPower int
 	Day        string
 	Time       string
@@ -230,6 +245,7 @@ func (a *appHandler) battleForm(w http.ResponseWriter, r *http.Request) {
 	var params = map[string]interface{}{
 		"Stages":  statink2.StageList,
 		"Weapons": statink2.WeaponList,
+		"Ranks":   rankList,
 		"History": a.prev,
 	}
 	err = tmpl.Execute(w, params)
@@ -253,6 +269,7 @@ func (a *appHandler) postBattle(w http.ResponseWriter, r *http.Request) {
 		Stage:      result.Stage,
 		Weapon:     result.Weapon,
 		GachiPower: result.GachiPower,
+		Rank:       result.Rank,
 	}
 	a.prev.Day, _ = getFormString(r.Form, "date")
 	a.prev.Time, _ = getFormString(r.Form, "start_time")

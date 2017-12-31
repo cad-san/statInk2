@@ -205,17 +205,23 @@
             <div class="form-group col-sm-6">
               <label for="rule">ウデマエ</label>
               <select class="form-control" name="rank">
-                <option value="s+">S+</option>
-                <option value="s">S</option>
-                <option value="a+">A+</option>
+                {{range $rank := .Ranks }}
+                {{if eq $rank $.History.Rank }}
+                <option value="{{$rank}}" selected>{{$rank}}</option>
+                {{else}}
+                <option value="{{$rank}}">{{$rank}}</option>
+                {{end}}{{end}}
               </select>
             </div>
             <div class="form-group col-sm-6">
               <label for="rule">ウデマエ（後）</label>
               <select class="form-control" name="rank_after">
-                <option value="s+">S+</option>
-                <option value="s">S</option>
-                <option value="a+">A+</option>
+                {{range $rank := .Ranks }}
+                {{if eq $rank $.History.Rank }}
+                <option value="{{$rank}}" selected>{{$rank}}</option>
+                {{else}}
+                <option value="{{$rank}}">{{$rank}}</option>
+                {{end}}{{end}}
               </select>
             </div>
             <div class="form-group col-sm-12">
