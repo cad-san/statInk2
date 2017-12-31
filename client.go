@@ -34,7 +34,7 @@ type Battle struct {
 
 	// match info
 	Stage      Stage `json:"stage"`
-	GachiPower int   `json:"estimate_gachi_power"`
+	GachiPower int   `json:"estimate_gachi_power,omitempty"`
 	StartAt    int64 `json:"start_at"`
 	EndAt      int64 `json:"end_at"`
 
@@ -46,7 +46,7 @@ type Battle struct {
 
 	// player info
 	Weapon       Weapon `json:"weapon"`
-	RankInTeam   int    `json:"rank_in_team"`
+	RankInTeam   int    `json:"rank_in_team,omitempty"`
 	KillOrAssist int    `json:"kill_or_assist"`
 	Kill         int    `json:"kill"`
 	Death        int    `json:"death"`
