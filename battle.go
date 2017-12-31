@@ -32,4 +32,5 @@ const (
 	Area     Rule = "area"
 	Yagura   Rule = "yagura"
 	Hoko     Rule = "hoko"
+	Asari    Rule = "asari"
 )
