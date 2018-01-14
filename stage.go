@@ -28,6 +28,7 @@ var StageList = map[Stage]string{
 	Battera:   "バッテラストリート",
 	BBass:     "Bバスパーク",
 	Chozame:   "チョウザメ造船",
+	Devon:     "デボン海洋博物館",
 	Engawa:    "エンガワ河川敷",
 	Fujitsubo: "フジツボスポーツクラブ",
 	Gangaze:   "ガンガゼ野外音楽堂",
