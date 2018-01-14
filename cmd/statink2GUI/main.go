@@ -51,8 +51,10 @@ type history struct {
 }
 
 type appHandler struct {
-	client *statink2.Client
-	prev   history
+	name    string
+	version string
+	client  *statink2.Client
+	prev    history
 }
 
 func parseFlag() options {
@@ -263,6 +265,8 @@ func (a *appHandler) postBattle(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	result.Agent = a.name
+	result.AgentVersion = a.version
 	a.prev = history{
 		Mode:       result.Mode,
 		Rule:       result.Rule,
@@ -314,7 +318,9 @@ func main() {
 	}
 	now := time.Now()
 	app := appHandler{
-		client: client,
+		name:    "go-statink2",
+		version: "0.1.0",
+		client:  client,
 		prev: history{
 			Day:      now.Format("2006-01-02"),
 			Time:     now.Format("15:04"),

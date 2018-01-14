@@ -27,6 +27,10 @@ type Client struct {
 
 // Battle is battle infomation
 type Battle struct {
+	// Client Info
+	Agent        string `json:"agent,omitempty"`
+	AgentVersion string `json:"agent_version,omitempty"`
+
 	// rule info
 	Lobby Lobby `json:"lobby"`
 	Mode  Mode  `json:"mode"`
